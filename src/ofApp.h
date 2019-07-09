@@ -36,6 +36,7 @@ class ofApp : public ofBaseApp{
     	std::array<int, 9> animationCounter = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     	std::array<int, 9> animationCounterMax = {500, 500, 500, 500, 500, 500, 500, 500, 500};
 
+    	// All animations declared here
     	CurvedArrow animationOne;
 		
 };
