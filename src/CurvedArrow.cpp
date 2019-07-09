@@ -30,6 +30,8 @@ CurvedArrow::CurvedArrow(glm::vec2 _start, glm::vec2 _middle, glm::vec2 _end, in
 }
 
 void CurvedArrow::setup() {
+	path.setCurveResolution(100);
+	ofSetCircleResolution(100);
 	color = ofColor(255, 40, 20);
 }
 
@@ -42,9 +44,7 @@ void CurvedArrow::draw() {
 	path.clear();
 	path.setStrokeColor(color);
 	path.setFilled(false);
-	path.setStrokeWidth(2);
-	path.setCurveResolution(100);
-	ofSetCircleResolution(100);
+	path.setStrokeWidth(4);
 	path.moveTo(start);
 	// Lerp the ending X and Y positions,
 	// so that we start by going halfway to the middle position,
