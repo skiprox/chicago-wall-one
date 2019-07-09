@@ -12,6 +12,8 @@ void ofApp::setup(){
 	mySerial.startContinuousRead();
 	ofAddListener(mySerial.NEW_MESSAGE,this,&ofApp::onNewMessage);
 	message = "";
+	// All the animations, all here
+	animationOne = CurvedArrow(glm::vec2(100, 100), glm::vec2(width/2.0, (height/3.0)*2), glm::vec2((width/3.0)*2.0, (height/3.0)*2.0), animationCounterMax[0]/2);
 }
 
 //--------------------------------------------------------------
@@ -76,7 +78,7 @@ void ofApp::drawAnimations(){
 			animationCounter[i]++;
 			// If we haven't hit the threshold for how long to
 			// run the animation, fucking run it
-			if (animationCounter[i] < 500) {
+			if (animationCounter[i] <= animationCounterMax[i]) {
 				runAnimation(i + 1);
 			} else { // Otherwise stop running the animation
 				shouldRunAnimation[i] = false;
@@ -101,7 +103,8 @@ void ofApp::runAnimation(int animationNum){
 	ofSetColor(colorOn);
 	switch(animationNum) {
 		case 1:
-			ofDrawRectangle(0, 0, width/3.0, height/3.0);
+			animationOne.update(animationCounter[0]);
+			animationOne.draw();
 			break;
 		case 2:
 			ofDrawRectangle(width/3.0, 0, width/3.0, height/3.0);

@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxSimpleSerial.h"
+#include "CurvedArrow.hpp"
 
 class ofApp : public ofBaseApp{
 
@@ -33,5 +34,8 @@ class ofApp : public ofBaseApp{
 
     	std::array<bool, 9> shouldRunAnimation = {false, false, false, false, false, false, false, false, false};
     	std::array<int, 9> animationCounter = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    	std::array<int, 9> animationCounterMax = {500, 500, 500, 500, 500, 500, 500, 500, 500};
+
+    	CurvedArrow animationOne;
 		
 };
