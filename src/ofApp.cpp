@@ -12,8 +12,13 @@ void ofApp::setup(){
 	mySerial.startContinuousRead();
 	ofAddListener(mySerial.NEW_MESSAGE,this,&ofApp::onNewMessage);
 	message = "";
-	// All the animations, all here
+	/**
+	 * ALL THE ANIMATIONS GO HERE
+	 */
+	// ONE ANIMATION
 	animationOne = CurvedArrow(glm::vec2(100, 100), glm::vec2(width/2.0, (height/3.0)*2), glm::vec2((width/3.0)*2.0, (height/3.0)*2.0), animationCounterMax[0]/2);
+	// TWO ANIMATION
+	animationTwo = MultiLine(glm::vec2(900, 100), glm::vec2((width/2.0) * 2, (height/3.0)*2.0), glm::vec2(width/3.0, (height/3.0)*2.0), animationCounterMax[1]/2);
 }
 
 //--------------------------------------------------------------
@@ -107,7 +112,8 @@ void ofApp::runAnimation(int animationNum){
 			animationOne.draw();
 			break;
 		case 2:
-			ofDrawRectangle(width/3.0, 0, width/3.0, height/3.0);
+			animationTwo.update(animationCounter[1]);
+			animationTwo.draw();
 			break;
 		case 3:
 			ofDrawRectangle(width/3.0 * 2, 0, width/3.0, height/3.0);

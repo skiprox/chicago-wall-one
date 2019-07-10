@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxSimpleSerial.h"
 #include "CurvedArrow.hpp"
+#include "MultiLine.hpp"
 
 class ofApp : public ofBaseApp{
 
@@ -38,5 +39,6 @@ class ofApp : public ofBaseApp{
 
     	// All animations declared here
     	CurvedArrow animationOne;
+    	MultiLine animationTwo;
 		
 };
