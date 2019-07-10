@@ -19,6 +19,12 @@ void ofApp::setup(){
 	animationOne = CurvedArrow(glm::vec2(100, 100), glm::vec2(width/2.0, (height/3.0)*2), glm::vec2((width/3.0)*2.0, (height/3.0)*2.0), animationCounterMax[0]/2);
 	// TWO ANIMATION
 	animationTwo = MultiLine(glm::vec2(900, 100), glm::vec2((width/2.0) * 2, (height/3.0)*2.0), glm::vec2(width/3.0, (height/3.0)*2.0), animationCounterMax[1]/2);
+	/**
+	 * ALL THE HAND MARKERS GO HERE
+	 */
+	handMarkers[0] = HandMarker(glm::vec2(100, 400), ofColor(240, 60, 40));
+	handMarkers[1] = HandMarker(glm::vec2(400, 600), ofColor(220, 120, 20));
+	handMarkers[2] = HandMarker(glm::vec2(1200, 300), ofColor(210, 190, 40));
 }
 
 //--------------------------------------------------------------
@@ -28,6 +34,9 @@ void ofApp::update(){
 		universalCounter = 0.0f;
 	} else {
 		universalCounter = (universalCounter + PI/100.0);
+	}
+	for (int i = 0; i < handMarkers.size(); i++) {
+		handMarkers[i].update(universalCounter);
 	}
 }
 
@@ -80,16 +89,9 @@ void ofApp::drawBackground(){
 
 //--------------------------------------------------------------
 void ofApp::drawHandMarkers(){
-	// Draw the fucking hand markers here
-	ofPushStyle();
-	ofSetColor(255,130,0);
-	float radius = 50 + 10 * sin(universalCounter);
-	ofFill();		// draw "filled shapes"
-	ofDrawCircle(100,400,radius);
-	ofNoFill();
-	ofSetHexColor(0xCCCCCC);
-	ofDrawCircle(100,400,80);
-	ofPopStyle();
+	for (int i = 0; i < handMarkers.size(); i++) {
+		handMarkers[i].draw();
+	}
 }
 
 //--------------------------------------------------------------

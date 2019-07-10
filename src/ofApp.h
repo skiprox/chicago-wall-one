@@ -5,6 +5,7 @@
 #include "ofxSimpleSerial.h"
 #include "CurvedArrow.hpp"
 #include "MultiLine.hpp"
+#include "HandMarker.hpp"
 
 class ofApp : public ofBaseApp{
 
@@ -44,5 +45,8 @@ class ofApp : public ofBaseApp{
     	// All animations declared here
     	CurvedArrow animationOne;
     	MultiLine animationTwo;
+
+    	// All the hand markers declared here
+    	std::array<HandMarker, 3> handMarkers;
 		
 };
