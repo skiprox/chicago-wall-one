@@ -36,11 +36,11 @@ class ofApp : public ofBaseApp{
 
     	vector<int> serialInput;
 
-    	std::array<int, 9> touchThreshold = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    	std::array<int, 9> touchThreshold = {{0, 0, 0, 0, 0, 0, 0, 0, 0}};
 
-    	std::array<bool, 9> shouldRunAnimation = {false, false, false, false, false, false, false, false, false};
-    	std::array<int, 9> animationCounter = {0, 0, 0, 0, 0, 0, 0, 0, 0};
-    	std::array<int, 9> animationCounterMax = {500, 500, 500, 500, 500, 500, 500, 500, 500};
+    	std::array<bool, 9> shouldRunAnimation = {{false, false, false, false, false, false, false, false, false}};
+    	std::array<int, 9> animationCounter = {{0, 0, 0, 0, 0, 0, 0, 0, 0}};
+    	std::array<int, 9> animationCounterMax = {{500, 500, 500, 500, 500, 500, 500, 500, 500}};
 
     	// All animations declared here
     	CurvedArrow animationOne;
