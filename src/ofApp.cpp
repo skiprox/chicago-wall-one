@@ -24,6 +24,11 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
 	updateSerials();
+	if (fabs(universalCounter - TWO_PI) < 0.0001) {
+		universalCounter = 0.0f;
+	} else {
+		universalCounter = (universalCounter + PI/100.0);
+	}
 }
 
 //--------------------------------------------------------------
@@ -58,6 +63,7 @@ void ofApp::onNewMessage(string & message)
 //--------------------------------------------------------------
 void ofApp::draw(){
 	drawBackground();
+	drawHandMarkers();
 	drawAnimations();
 }
 
@@ -70,6 +76,20 @@ void ofApp::drawBackground(){
 		ofDrawRectangle(width/3.0 * (i + 1) - 1, 0, 2, height);
 		ofDrawRectangle(0, height/3.0 * (i + 1) - 1, width, 2);
 	}
+}
+
+//--------------------------------------------------------------
+void ofApp::drawHandMarkers(){
+	// Draw the fucking hand markers here
+	ofPushStyle();
+	ofSetColor(255,130,0);
+	float radius = 50 + 10 * sin(universalCounter);
+	ofFill();		// draw "filled shapes"
+	ofDrawCircle(100,400,radius);
+	ofNoFill();
+	ofSetHexColor(0xCCCCCC);
+	ofDrawCircle(100,400,80);
+	ofPopStyle();
 }
 
 //--------------------------------------------------------------

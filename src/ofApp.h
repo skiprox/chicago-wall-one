@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "Constants.hpp"
 #include "ofxSimpleSerial.h"
 #include "CurvedArrow.hpp"
 #include "MultiLine.hpp"
@@ -13,6 +14,7 @@ class ofApp : public ofBaseApp{
 		void updateSerials();
 		void draw();
 		void drawBackground();
+		void drawHandMarkers();
 		void drawAnimations();
 		void onNewMessage(string & message);
 		void keyReleased(int key);
@@ -26,6 +28,8 @@ class ofApp : public ofBaseApp{
 
     	float width;
     	float height;
+
+    	float universalCounter = 0.0;
 
     	string message;
 
