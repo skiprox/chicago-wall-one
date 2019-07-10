@@ -19,6 +19,8 @@ void ofApp::setup(){
 	animationOne = CurvedArrow(glm::vec2(100, 100), glm::vec2(width/2.0, (height/3.0)*2), glm::vec2((width/3.0)*2.0, (height/3.0)*2.0), animationCounterMax[0]/2);
 	// TWO ANIMATION
 	animationTwo = MultiLine(glm::vec2(900, 100), glm::vec2((width/2.0) * 2, (height/3.0)*2.0), glm::vec2(width/3.0, (height/3.0)*2.0), animationCounterMax[1]/2);
+	// THREE ANIMATION
+	animationThree = DashedLine(glm::vec2(100, 200), glm::vec2(width/3.0 * 2.0, (height/3.0)*2.0), animationCounterMax[2]/2);
 	/**
 	 * ALL THE HAND MARKERS GO HERE
 	 */
@@ -138,7 +140,8 @@ void ofApp::runAnimation(int animationNum){
 			animationTwo.draw();
 			break;
 		case 3:
-			ofDrawRectangle(width/3.0 * 2, 0, width/3.0, height/3.0);
+			animationThree.update(animationCounter[2]);
+			animationThree.draw();
 			break;
 		case 4:
 			ofDrawRectangle(0, height/3.0, width/3.0, height/3.0);

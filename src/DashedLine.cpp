@@ -1,0 +1,55 @@
+//
+//  DashedLine.cpp
+//  DashedLines
+//
+//
+//
+
+#include "DashedLine.hpp"
+
+DashedLine::DashedLine()
+{
+    start = glm::vec2(0, 0);
+    end = glm::vec2(ofGetWidth(), ofGetHeight());
+    incMax = 500;
+    inc = 0;
+    setup();
+}
+
+DashedLine::DashedLine(glm::vec2 _start, glm::vec2 _end, int _incMax) {
+	start = _start;
+	end = _end;
+	incMax = _incMax;
+	inc = 0;
+    setup();
+}
+
+void DashedLine::setup() {
+	path.setCurveResolution(100);
+	ofSetCircleResolution(100);
+	color = ofColor(255, 40, 20);
+}
+
+void DashedLine::update(int _inc) {
+	inc = min(_inc, incMax);
+}
+
+void DashedLine::draw() {
+	ofPushStyle();
+	path.clear();
+	path.setStrokeColor(color);
+	path.setFilled(false);
+	path.setStrokeWidth(10);
+	float distX = fabs(start.x - end.x);
+	float distY = fabs(start.y - end.y);
+	float segmentLenX = (distX/((float)incMax/10.0))/2.0;
+	float segmentLenY = (distY/((float)incMax/10.0))/2.0;
+	for (int i = 0; i < inc/10; i++) {
+		float posX = ofLerp(start.x, end.x, (float)i/((float)incMax/10.0));
+		float posY = ofLerp(start.y, end.y, (float)i/((float)incMax/10.0));
+		path.moveTo(posX, posY);
+		path.lineTo(posX + segmentLenX, posY + segmentLenY);
+	}
+	path.draw();
+	ofPopStyle();
+}
