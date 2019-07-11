@@ -39,9 +39,9 @@ void DashedLine::draw() {
 	path.clear();
 	path.setStrokeColor(color);
 	path.setFilled(false);
-	path.setStrokeWidth(10);
-	float distX = fabs(start.x - end.x);
-	float distY = fabs(start.y - end.y);
+	path.setStrokeWidth(2);
+	float distX = start.x - end.x;
+	float distY = start.y - end.y;
 	float segmentLenX = (distX/((float)incMax/10.0))/2.0;
 	float segmentLenY = (distY/((float)incMax/10.0))/2.0;
 	for (int i = 0; i < inc/10; i++) {

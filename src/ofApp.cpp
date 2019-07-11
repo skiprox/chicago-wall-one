@@ -20,7 +20,7 @@ void ofApp::setup(){
 	// TWO ANIMATION
 	animationTwo = MultiLine(glm::vec2(900, 100), glm::vec2((width/2.0) * 2, (height/3.0)*2.0), glm::vec2(width/3.0, (height/3.0)*2.0), animationCounterMax[1]/2);
 	// THREE ANIMATION
-	animationThree = DashedLine(glm::vec2(100, 200), glm::vec2(width/3.0 * 2.0, (height/3.0)*2.0), animationCounterMax[2]/2);
+	animationThree = DashedLine(glm::vec2((width/3.0) * 2.0 + 200, 200), glm::vec2(width/3.0 - 100, (height/3.0)*2.0), animationCounterMax[2]/4);
 	/**
 	 * ALL THE HAND MARKERS GO HERE
 	 */
