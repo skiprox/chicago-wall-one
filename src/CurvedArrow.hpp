@@ -12,7 +12,7 @@ class CurvedArrow
 public:
 
 	CurvedArrow();
-    CurvedArrow(glm::vec2 _start, glm::vec2 _middle, glm::vec2 _end, int _incMax);
+    CurvedArrow(glm::vec2 _start, glm::vec2 _middle, glm::vec2 _end, ofColor _color, int _incMax);
 
     void setup();
 	void update(int _inc);

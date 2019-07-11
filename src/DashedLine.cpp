@@ -11,23 +11,23 @@ DashedLine::DashedLine()
 {
     start = glm::vec2(0, 0);
     end = glm::vec2(ofGetWidth(), ofGetHeight());
+    color = ofColor(255, 40, 20);
     incMax = 500;
-    inc = 0;
     setup();
 }
 
-DashedLine::DashedLine(glm::vec2 _start, glm::vec2 _end, int _incMax) {
+DashedLine::DashedLine(glm::vec2 _start, glm::vec2 _end, ofColor _color, int _incMax) {
 	start = _start;
 	end = _end;
+	color = _color;
 	incMax = _incMax;
-	inc = 0;
     setup();
 }
 
 void DashedLine::setup() {
 	path.setCurveResolution(100);
 	ofSetCircleResolution(100);
-	color = ofColor(255, 40, 20);
+	inc = 0;
 }
 
 void DashedLine::update(int _inc) {

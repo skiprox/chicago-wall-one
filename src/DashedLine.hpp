@@ -12,7 +12,7 @@ class DashedLine
 public:
 
 	DashedLine();
-    DashedLine(glm::vec2 _start, glm::vec2 _end, int _incMax);
+    DashedLine(glm::vec2 _start, glm::vec2 _end, ofColor _color, int _incMax);
 
     void setup();
 	void update(int _inc);

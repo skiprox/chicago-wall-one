@@ -1,6 +1,6 @@
 //
 //  MultiLine.hpp
-//  Curved Arrows Class
+//  Multi Line Class
 //
 //
 
@@ -12,17 +12,18 @@ class MultiLine
 public:
 
 	MultiLine();
-    MultiLine(glm::vec2 _start, glm::vec2 _middle, glm::vec2 _end, int _incMax);
+    MultiLine(vector<std::array<glm::vec2, 4>> _pts, ofColor _color, int _incMax);
 
     void setup();
 	void update(int _inc);
 	void draw();
+	float quadEaseOut(float t);
 
 	ofPath path;
 
-    glm::vec2 start, middle, end;
+    vector<std::array<glm::vec2, 4>> pts;
 
-    int inc, incMax;
+    int inc, incMax, numSegments;
 
 	ofColor color;
 };

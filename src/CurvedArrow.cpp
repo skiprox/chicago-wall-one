@@ -14,24 +14,24 @@ CurvedArrow::CurvedArrow()
     start = glm::vec2(ofRandom(width), ofRandom(height));
     middle = glm::vec2(ofRandom(width), ofRandom(height));
     end = glm::vec2(ofRandom(width), ofRandom(height));
+    color = ofColor(255, 40, 20);
     incMax = 500;
-    inc = 0;
     setup();
 }
 
-CurvedArrow::CurvedArrow(glm::vec2 _start, glm::vec2 _middle, glm::vec2 _end, int _incMax) {
+CurvedArrow::CurvedArrow(glm::vec2 _start, glm::vec2 _middle, glm::vec2 _end, ofColor _color, int _incMax) {
 	start = _start;
 	middle = _middle;
 	end = _end;
+	color = _color;
 	incMax = _incMax;
-	inc = 0;
     setup();
 }
 
 void CurvedArrow::setup() {
 	path.setCurveResolution(100);
 	ofSetCircleResolution(100);
-	color = ofColor(255, 40, 20);
+	inc = 0;
 }
 
 void CurvedArrow::update(int _inc) {

@@ -16,17 +16,24 @@ void ofApp::setup(){
 	 * ALL THE ANIMATIONS GO HERE
 	 */
 	// ONE ANIMATION
-	animationOne = CurvedArrow(glm::vec2(100, 100), glm::vec2(width/2.0, (height/3.0)*2), glm::vec2((width/3.0)*2.0, (height/3.0)*2.0), animationCounterMax[0]/2);
+	animationOne = CurvedArrow(glm::vec2(100, 100), glm::vec2(width/2.0, (height/3.0)*2), glm::vec2((width/3.0)*2.0, (height/3.0)*2.0), red, animationCounterMax[0]/2);
 	// TWO ANIMATION
-	animationTwo = MultiLine(glm::vec2(900, 100), glm::vec2((width/2.0) * 2, (height/3.0)*2.0), glm::vec2(width/3.0, (height/3.0)*2.0), animationCounterMax[1]/2);
+	vector<std::array<glm::vec2, 4>> _pts;
+	array<glm::vec2, 4> newPoints1 = {{glm::vec2(50, height/2 - 20), glm::vec2(50, height/2 + 20), glm::vec2(width - 50, height/2 + 15), glm::vec2(width - 50, height/2 - 15)}};
+	_pts.push_back(newPoints1);
+	array<glm::vec2, 4> newPoints2 = {{glm::vec2(width - 80, height/2 - 15), glm::vec2(width - 50, height/2 - 15), glm::vec2(width - 55, 50), glm::vec2(width - 75, 50)}};
+	_pts.push_back(newPoints2);
+	array<glm::vec2, 4> newPoints3 = {{glm::vec2(width - 75, 65), glm::vec2(width - 75, 50), glm::vec2(200, 55), glm::vec2(200, 60)}};
+	_pts.push_back(newPoints3);
+	animationTwo = MultiLine(_pts, red, 250);
 	// THREE ANIMATION
-	animationThree = DashedLine(glm::vec2((width/3.0) * 2.0 + 200, 200), glm::vec2(width/3.0 - 100, (height/3.0)*2.0), animationCounterMax[2]/4);
+	animationThree = DashedLine(glm::vec2((width/3.0) * 2.0 + 200, 200), glm::vec2(width/3.0 - 100, (height/3.0)*2.0), red, animationCounterMax[2]/4);
 	/**
 	 * ALL THE HAND MARKERS GO HERE
 	 */
-	handMarkers[0] = HandMarker(glm::vec2(100, 400), ofColor(240, 60, 40));
-	handMarkers[1] = HandMarker(glm::vec2(400, 600), ofColor(220, 120, 20));
-	handMarkers[2] = HandMarker(glm::vec2(1200, 300), ofColor(210, 190, 40));
+	handMarkers[0] = HandMarker(glm::vec2(100, 400), ofColor(240, 220, 40));
+	handMarkers[1] = HandMarker(glm::vec2(400, 600), ofColor(40, 190, 240));
+	handMarkers[2] = HandMarker(glm::vec2(1200, 300), ofColor(20, 240, 180));
 }
 
 //--------------------------------------------------------------
@@ -74,8 +81,8 @@ void ofApp::onNewMessage(string & message)
 //--------------------------------------------------------------
 void ofApp::draw(){
 	drawBackground();
-	drawHandMarkers();
 	drawAnimations();
+	drawHandMarkers();
 }
 
 //--------------------------------------------------------------
@@ -129,7 +136,7 @@ void ofApp::keyReleased(int key){
 
 //--------------------------------------------------------------
 void ofApp::runAnimation(int animationNum){
-	ofSetColor(colorOn);
+	ofSetColor(red);
 	switch(animationNum) {
 		case 1:
 			animationOne.update(animationCounter[0]);
