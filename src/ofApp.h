@@ -12,6 +12,7 @@ class ofApp : public ofBaseApp{
 
 	public:
 		void setup();
+        void setupAnimations();
 		void update();
 		void updateSerials();
 		void draw();
@@ -48,6 +49,12 @@ class ofApp : public ofBaseApp{
     	CurvedArrow animationOne;
     	MultiLine animationTwo;
     	DashedLine animationThree;
+        MultiLine animationFour;
+        MultiLine animationFive;
+
+        // All arbitrary animation variables which we'll need to create animations
+        vector<std::array<glm::vec2, 4>> _pts;
+        array<glm::vec2, 4> newPoints1, newPoints2, newPoints3, newPoints4;
 
     	// All the hand markers declared here
     	std::array<HandMarker, 3> handMarkers;

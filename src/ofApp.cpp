@@ -12,22 +12,82 @@ void ofApp::setup(){
 	mySerial.startContinuousRead();
 	ofAddListener(mySerial.NEW_MESSAGE,this,&ofApp::onNewMessage);
 	message = "";
+	setupAnimations();
+}
+
+//--------------------------------------------------------------
+void ofApp::setupAnimations(){
 	/**
 	 * ALL THE ANIMATIONS GO HERE
 	 */
 	// ONE ANIMATION
 	animationOne = CurvedArrow(glm::vec2(100, 100), glm::vec2(width/2.0, (height/3.0)*2), glm::vec2((width/3.0)*2.0, (height/3.0)*2.0), red, animationCounterMax[0]/2);
 	// TWO ANIMATION
-	vector<std::array<glm::vec2, 4>> _pts;
-	array<glm::vec2, 4> newPoints1 = {{glm::vec2(50, height/2 - 20), glm::vec2(50, height/2 + 20), glm::vec2(width - 50, height/2 + 15), glm::vec2(width - 50, height/2 - 15)}};
+	newPoints1 = {{
+		glm::vec2(50, height/2 - 20),
+		glm::vec2(50, height/2 + 20),
+		glm::vec2(width - 50, height/2 + 15),
+		glm::vec2(width - 50, height/2 - 15)
+	}};
 	_pts.push_back(newPoints1);
-	array<glm::vec2, 4> newPoints2 = {{glm::vec2(width - 80, height/2 - 15), glm::vec2(width - 50, height/2 - 15), glm::vec2(width - 55, 50), glm::vec2(width - 75, 50)}};
+	newPoints2 = {{
+		glm::vec2(width - 80, height/2 - 15),
+		glm::vec2(width - 50, height/2 - 15),
+		glm::vec2(width - 55, 50),
+		glm::vec2(width - 75, 50)
+	}};
 	_pts.push_back(newPoints2);
-	array<glm::vec2, 4> newPoints3 = {{glm::vec2(width - 75, 65), glm::vec2(width - 75, 50), glm::vec2(200, 55), glm::vec2(200, 60)}};
+	newPoints3 = {{
+		glm::vec2(width - 75, 65),
+		glm::vec2(width - 75, 50),
+		glm::vec2(200, 55),
+		glm::vec2(200, 60)
+	}};
 	_pts.push_back(newPoints3);
 	animationTwo = MultiLine(_pts, red, 250);
 	// THREE ANIMATION
 	animationThree = DashedLine(glm::vec2((width/3.0) * 2.0 + 200, 200), glm::vec2(width/3.0 - 100, (height/3.0)*2.0), red, animationCounterMax[2]/4);
+	// FOUR ANIMATION
+	_pts.clear();
+	newPoints1 = {{
+		glm::vec2(width - 200, 40),
+		glm::vec2(width - 220, 40),
+		glm::vec2(width - 215, height - 20),
+		glm::vec2(width - 205, height - 20)
+	}};
+	_pts.push_back(newPoints1);
+	newPoints2 = {{
+		glm::vec2(width - 205, height - 30),
+		glm::vec2(width - 205, height - 20),
+		glm::vec2(200, height - 22),
+		glm::vec2(200, height - 28)
+	}};
+	_pts.push_back(newPoints2);
+	newPoints3 = {{
+		glm::vec2(208, height - 28),
+		glm::vec2(200, height - 28),
+		glm::vec2(202, 240),
+		glm::vec2(206, 240)
+	}};
+	_pts.push_back(newPoints3);
+	animationFour = MultiLine(_pts, red, 250);
+	// FIVE ANIMATION
+	_pts.clear();
+	newPoints1 = {{
+		glm::vec2(300, height - 40),
+		glm::vec2(300, height - 20),
+		glm::vec2(width - 215, height - 40),
+		glm::vec2(width - 215, height - 50)
+	}};
+	_pts.push_back(newPoints1);
+	newPoints2 = {{
+		glm::vec2(width - 225, height - 45),
+		glm::vec2(width - 215, height - 50),
+		glm::vec2(200, 40),
+		glm::vec2(192, 40)
+	}};
+	_pts.push_back(newPoints2);
+	animationFive = MultiLine(_pts, red, 250);
 	/**
 	 * ALL THE HAND MARKERS GO HERE
 	 */
@@ -151,10 +211,12 @@ void ofApp::runAnimation(int animationNum){
 			animationThree.draw();
 			break;
 		case 4:
-			ofDrawRectangle(0, height/3.0, width/3.0, height/3.0);
+			animationFour.update(animationCounter[3]);
+			animationFour.draw();
 			break;
 		case 5:
-			ofDrawRectangle(width/3.0, height/3.0, width/3.0, height/3.0);
+			animationFive.update(animationCounter[4]);
+			animationFive.draw();
 			break;
 		case 6:
 			ofDrawRectangle(width/3.0 * 2, height/3.0, width/3.0, height/3.0);

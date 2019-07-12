@@ -41,10 +41,10 @@ void MultiLine::update(int _inc) {
 void MultiLine::draw() {
 	ofPushStyle();
 	path.clear();
-	path.setFillColor(ofColor(255, 40, 60));
+	path.setFillColor(color);
 	path.setFilled(true);
 	for (int i = 0; i < numSegments; i++) {
-		if (inc >= (incMax/(numSegments) * i) && inc <= incMax/(numSegments) * (i + 1)) {
+		if (inc > (incMax/(numSegments) * i) && inc <= incMax/(numSegments) * (i + 1)) {
 			for (int j = 0; j < i; j++) {
 				path.moveTo(pts[j][0]);
 				path.lineTo(pts[j][1]);
