@@ -51,6 +51,7 @@ class ofApp : public ofBaseApp{
     	DashedLine animationThree;
         DashedLine animationFour;
         DottedLine animationFive;
+        DottedLine animationSix;
 
         // All arbitrary animation variables which we'll need to create animations
         vector<std::array<glm::vec2, 4>> _pts;

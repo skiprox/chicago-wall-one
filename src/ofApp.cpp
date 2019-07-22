@@ -44,7 +44,12 @@ void ofApp::setupAnimations(){
 	// FIVE ANIMATION
 	pts.push_back(array<glm::vec2, 2> {{glm::vec2(0, 0), glm::vec2(width/2.1, height/2.2)}});
 	pts.push_back(array<glm::vec2, 2> {{glm::vec2(width/2.1, height/2.2), glm::vec2(width/1.3, 100)}});
-	animationFive = DottedLine(pts, 3.0, ofColor(240, 40, 20), 250, true);
+	animationFive = DottedLine(pts, 2.0, ofColor(240, 40, 20), 250, true);
+	pts.clear();
+	// SIX ANIMATION
+	pts.push_back(array<glm::vec2, 2> {{glm::vec2(width/6.0, height/1.1), glm::vec2(width/4.4, height/2.2)}});
+	pts.push_back(array<glm::vec2, 2> {{glm::vec2(width/4.4, height/2.2), glm::vec2(width/1.3, height/2.3)}});
+	animationSix = DottedLine(pts, 5.0, ofColor(240, 40, 20), 250, true);
 	pts.clear();
 	/**
 	 * ALL THE HAND MARKERS GO HERE
@@ -177,7 +182,8 @@ void ofApp::runAnimation(int animationNum){
 			animationFive.draw();
 			break;
 		case 6:
-			ofDrawRectangle(width/3.0 * 2, height/3.0, width/3.0, height/3.0);
+			animationSix.update(animationCounter[5]);
+			animationSix.draw();
 			break;
 		case 7:
 			ofDrawRectangle(0, height/3.0 * 2, width/3.0, height/3.0);
