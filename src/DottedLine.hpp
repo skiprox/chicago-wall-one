@@ -1,5 +1,5 @@
 //
-//  DashedLine.hpp
+//  DottedLine.hpp
 //  Dashed Line Class
 //
 //
@@ -7,12 +7,12 @@
 #pragma once
 #include "ofMain.h"
 
-class DashedLine
+class DottedLine
 {
 public:
 
-	DashedLine();
-	DashedLine(vector<std::array<glm::vec2, 2>> _pts, float _strokeWidth, ofColor _color, int _incMax, bool _arrow);
+	DottedLine();
+	DottedLine(vector<std::array<glm::vec2, 2>> _pts, float _circleRadius, ofColor _color, int _incMax, bool _arrow);
 
 	void setup();
 	void update(int _inc);
@@ -20,11 +20,9 @@ public:
 	float quadEaseOut(float t);
 	float sineEaseOut(float t);
 
-	ofPath path;
-
 	vector<std::array<glm::vec2, 2>> pts;
 
-	float strokeWidth;
+	float circleRadius;
 
 	int inc, incMax;
 

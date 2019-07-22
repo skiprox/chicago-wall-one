@@ -20,74 +20,32 @@ void ofApp::setupAnimations(){
 	/**
 	 * ALL THE ANIMATIONS GO HERE
 	 */
+	vector<std::array<glm::vec2, 2>> pts;
 	// ONE ANIMATION
-	animationOne = CurvedArrow(glm::vec2(100, 100), glm::vec2(width/2.0, (height/3.0)*2), glm::vec2((width/3.0)*2.0, (height/3.0)*2.0), red, animationCounterMax[0]/2);
+	pts.push_back(array<glm::vec2, 2> {{glm::vec2(0, 0), glm::vec2(width/2.0, height/2.0)}});
+	pts.push_back(array<glm::vec2, 2> {{glm::vec2(width/2.0, height/2.0), glm::vec2(width/1.2, 100)}});
+	animationOne = Line(pts, 2.0, ofColor(240, 40, 20), 250, true);
+	pts.clear();
 	// TWO ANIMATION
-	newPoints1 = {{
-		glm::vec2(50, height/2 - 20),
-		glm::vec2(50, height/2 + 20),
-		glm::vec2(width - 50, height/2 + 15),
-		glm::vec2(width - 50, height/2 - 15)
-	}};
-	_pts.push_back(newPoints1);
-	newPoints2 = {{
-		glm::vec2(width - 80, height/2 - 15),
-		glm::vec2(width - 50, height/2 - 15),
-		glm::vec2(width - 55, 50),
-		glm::vec2(width - 75, 50)
-	}};
-	_pts.push_back(newPoints2);
-	newPoints3 = {{
-		glm::vec2(width - 75, 65),
-		glm::vec2(width - 75, 50),
-		glm::vec2(200, 55),
-		glm::vec2(200, 60)
-	}};
-	_pts.push_back(newPoints3);
-	animationTwo = MultiLine(_pts, red, 250);
+	pts.push_back(array<glm::vec2, 2> {{glm::vec2(0, height/1.1), glm::vec2(100, height/2)}});
+	pts.push_back(array<glm::vec2, 2> {{glm::vec2(98, height/2 - 2), glm::vec2(width/1.1, height/1.6)}});
+	animationTwo = Line(pts, 10.0, ofColor(240, 40, 20), 250, true);
+	pts.clear();
 	// THREE ANIMATION
-	animationThree = DashedLine(glm::vec2((width/3.0) * 2.0 + 200, 200), glm::vec2(width/3.0 - 100, (height/3.0)*2.0), red, animationCounterMax[2]/4);
+	pts.push_back(array<glm::vec2, 2> {{glm::vec2(0, height/1.1), glm::vec2(100, height/2)}});
+	pts.push_back(array<glm::vec2, 2> {{glm::vec2(98, height/2 - 2), glm::vec2(width/1.1, height/1.3)}});
+	animationThree = DashedLine(DashedLine(pts, 2.0, ofColor(240, 40, 20), 250, true));
+	pts.clear();
 	// FOUR ANIMATION
-	_pts.clear();
-	newPoints1 = {{
-		glm::vec2(width - 200, 40),
-		glm::vec2(width - 220, 40),
-		glm::vec2(width - 215, height - 20),
-		glm::vec2(width - 205, height - 20)
-	}};
-	_pts.push_back(newPoints1);
-	newPoints2 = {{
-		glm::vec2(width - 205, height - 30),
-		glm::vec2(width - 205, height - 20),
-		glm::vec2(200, height - 22),
-		glm::vec2(200, height - 28)
-	}};
-	_pts.push_back(newPoints2);
-	newPoints3 = {{
-		glm::vec2(208, height - 28),
-		glm::vec2(200, height - 28),
-		glm::vec2(202, 240),
-		glm::vec2(206, 240)
-	}};
-	_pts.push_back(newPoints3);
-	animationFour = MultiLine(_pts, red, 250);
+	pts.push_back(array<glm::vec2, 2> {{glm::vec2(width/1.1, height/3), glm::vec2(200, 100)}});
+	pts.push_back(array<glm::vec2, 2> {{glm::vec2(202, 102), glm::vec2(100, height/1.6)}});
+	animationFour = DashedLine(DashedLine(pts, 5.0, ofColor(240, 40, 20), 250, true));
+	pts.clear();
 	// FIVE ANIMATION
-	_pts.clear();
-	newPoints1 = {{
-		glm::vec2(300, height - 40),
-		glm::vec2(300, height - 20),
-		glm::vec2(width - 215, height - 40),
-		glm::vec2(width - 215, height - 50)
-	}};
-	_pts.push_back(newPoints1);
-	newPoints2 = {{
-		glm::vec2(width - 225, height - 45),
-		glm::vec2(width - 215, height - 50),
-		glm::vec2(200, 40),
-		glm::vec2(192, 40)
-	}};
-	_pts.push_back(newPoints2);
-	animationFive = MultiLine(_pts, red, 250);
+	pts.push_back(array<glm::vec2, 2> {{glm::vec2(0, 0), glm::vec2(width/2.1, height/2.2)}});
+	pts.push_back(array<glm::vec2, 2> {{glm::vec2(width/2.1, height/2.2), glm::vec2(width/1.3, 100)}});
+	animationFive = DottedLine(pts, 3.0, ofColor(240, 40, 20), 250, true);
+	pts.clear();
 	/**
 	 * ALL THE HAND MARKERS GO HERE
 	 */

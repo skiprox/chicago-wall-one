@@ -3,9 +3,9 @@
 #include "ofMain.h"
 #include "Constants.hpp"
 #include "ofxSimpleSerial.h"
-#include "CurvedArrow.hpp"
-#include "MultiLine.hpp"
+#include "Line.hpp"
 #include "DashedLine.hpp"
+#include "DottedLine.hpp"
 #include "HandMarker.hpp"
 
 class ofApp : public ofBaseApp{
@@ -46,11 +46,11 @@ class ofApp : public ofBaseApp{
     	std::array<int, 9> animationCounterMax = {{500, 500, 500, 500, 500, 500, 500, 500, 500}};
 
     	// All animations declared here
-    	CurvedArrow animationOne;
-    	MultiLine animationTwo;
+    	Line animationOne;
+    	Line animationTwo;
     	DashedLine animationThree;
-        MultiLine animationFour;
-        MultiLine animationFive;
+        DashedLine animationFour;
+        DottedLine animationFive;
 
         // All arbitrary animation variables which we'll need to create animations
         vector<std::array<glm::vec2, 4>> _pts;
