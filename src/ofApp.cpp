@@ -115,7 +115,12 @@ void ofApp::drawBackground(){
 	// Draw up and down lines
 	for (int i = 0; i < 2; i++) {
 		ofDrawRectangle(width/3.0 * (i + 1) - 1, 0, 2, height);
-		ofDrawRectangle(0, height/3.0 * (i + 1) - 1, width, 2);
+		float divConst = 5.0;
+		if (i == 0) {
+			ofDrawRectangle(0, height/divConst, width, 2);
+		} else {
+			ofDrawRectangle(0, height - height/divConst, width, 2);
+		}
 	}
 }
 
