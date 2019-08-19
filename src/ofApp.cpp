@@ -6,6 +6,8 @@ void ofApp::setup(){
 	ofSetCircleResolution(100);
 	width = ofGetWidth();
 	height = ofGetHeight();
+	// Small square size
+	smSqSize = height/5.0;
 	mySerial.listDevices();
 	vector <ofSerialDeviceInfo> deviceList = mySerial.getDeviceList();
 	mySerial.setup(0, baud); //open the first device
@@ -24,39 +26,54 @@ void ofApp::setupAnimations(){
 	// ONE ANIMATION
 	pts.push_back(array<glm::vec2, 2> {{glm::vec2(0, 0), glm::vec2(width/2.0, height/2.0)}});
 	pts.push_back(array<glm::vec2, 2> {{glm::vec2(width/2.0, height/2.0), glm::vec2(width/1.2, 100)}});
-	animationOne = Line(pts, 2.0, ofColor(240, 40, 20), 250, true);
+	animationOne = Line(pts, 2.0, red, 250, true);
 	pts.clear();
 	// TWO ANIMATION
 	pts.push_back(array<glm::vec2, 2> {{glm::vec2(0, height/1.1), glm::vec2(100, height/2)}});
 	pts.push_back(array<glm::vec2, 2> {{glm::vec2(98, height/2 - 2), glm::vec2(width/1.1, height/1.6)}});
-	animationTwo = Line(pts, 10.0, ofColor(240, 40, 20), 250, true);
+	animationTwo = Line(pts, 5.0, red, 250, true);
 	pts.clear();
 	// THREE ANIMATION
-	pts.push_back(array<glm::vec2, 2> {{glm::vec2(0, height/1.1), glm::vec2(100, height/2)}});
+	pts.push_back(array<glm::vec2, 2> {{glm::vec2(400, height/1.1), glm::vec2(100, height/2)}});
 	pts.push_back(array<glm::vec2, 2> {{glm::vec2(98, height/2 - 2), glm::vec2(width/1.1, height/1.3)}});
-	animationThree = DashedLine(DashedLine(pts, 2.0, ofColor(240, 40, 20), 250, true));
+	animationThree = DashedLine(DashedLine(pts, 2.0, red, 250, true));
 	pts.clear();
 	// FOUR ANIMATION
 	pts.push_back(array<glm::vec2, 2> {{glm::vec2(width/1.1, height/3), glm::vec2(200, 100)}});
 	pts.push_back(array<glm::vec2, 2> {{glm::vec2(202, 102), glm::vec2(100, height/1.6)}});
-	animationFour = DashedLine(DashedLine(pts, 5.0, ofColor(240, 40, 20), 250, true));
+	animationFour = DashedLine(DashedLine(pts, 5.0, red, 250, true));
 	pts.clear();
 	// FIVE ANIMATION
 	pts.push_back(array<glm::vec2, 2> {{glm::vec2(0, 0), glm::vec2(width/2.1, height/2.2)}});
 	pts.push_back(array<glm::vec2, 2> {{glm::vec2(width/2.1, height/2.2), glm::vec2(width/1.3, 100)}});
-	animationFive = DottedLine(pts, 2.0, ofColor(240, 40, 20), 250, true);
+	animationFive = DottedLine(pts, 2.0, red, 250, true);
 	pts.clear();
 	// SIX ANIMATION
 	pts.push_back(array<glm::vec2, 2> {{glm::vec2(width/6.0, height/1.1), glm::vec2(width/4.4, height/2.2)}});
 	pts.push_back(array<glm::vec2, 2> {{glm::vec2(width/4.4, height/2.2), glm::vec2(width/1.3, height/2.3)}});
-	animationSix = DottedLine(pts, 5.0, ofColor(240, 40, 20), 250, true);
+	animationSix = DottedLine(pts, 5.0, red, 250, true);
 	pts.clear();
 	/**
 	 * ALL THE HAND MARKERS GO HERE
 	 */
-	handMarkers[0] = HandMarker(glm::vec2(100, 400), ofColor(240, 220, 40));
-	handMarkers[1] = HandMarker(glm::vec2(400, 600), ofColor(40, 190, 240));
-	handMarkers[2] = HandMarker(glm::vec2(1200, 300), ofColor(20, 240, 180));
+	// Top left
+	handMarkers[0] = HandMarker(glm::vec2(width/3.0 - (width/3.0)/2.0, smSqSize - 100), red);
+	// Top center
+	handMarkers[1] = HandMarker(glm::vec2(width/2.0, smSqSize - 100), red);
+	// Top right
+	handMarkers[2] = HandMarker(glm::vec2(width - (width/3.0)/2.0, smSqSize - 100), red);
+	// middle left
+	handMarkers[3] = HandMarker(glm::vec2(width/3.0 - (width/3.0)/2.0, height - smSqSize - 100), red);
+	// middle center
+	handMarkers[4] = HandMarker(glm::vec2(width/2.0, height - smSqSize - 100), red);
+	// middle right
+	handMarkers[5] = HandMarker(glm::vec2(width - (width/3.0)/2.0, height - smSqSize - 100), red);
+	// bottom left
+	handMarkers[6] = HandMarker(glm::vec2(width/3.0 - (width/3.0)/2.0, height - smSqSize + 100), red);
+	// bottom center
+	handMarkers[7] = HandMarker(glm::vec2(width/2.0, height - smSqSize + 100), red);
+	// bottom right
+	handMarkers[8] = HandMarker(glm::vec2(width - (width/3.0)/2.0, height - smSqSize + 100), red);
 }
 
 //--------------------------------------------------------------
@@ -84,8 +101,18 @@ void ofApp::updateSerials(){
 			if (touchThreshold[i] >= 50) {
 				// Reset the threshold
 				touchThreshold[i] = 0;
-				// Run the animation
-				shouldRunAnimation[i] = true;
+				// If it's the first button, we should run the animation
+				if (i == 0) {
+					shouldRunAnimation[i] = true;
+				} else if (i == 1 || i == 2) {
+					if (shouldRunAnimation[0]) {
+						shouldRunAnimation[i];
+					}
+				} else if (i == 3 || i == 4) {
+					if (shouldRunAnimation[1] || shouldRunAnimation[2]) {
+						shouldRunAnimation[i];
+					}
+				}
 			}
 		}
 	}
@@ -153,12 +180,36 @@ void ofApp::drawAnimations(){
 }
 
 //--------------------------------------------------------------
-void ofApp::keyReleased(int key){
+void ofApp::keyPressed(int key){
 	// Keys 1 through 9 are 49 through 57
 	// so use this to determine the index of the animation we should run
 	if (key >= 49 && key <= 57) {
 		int keyIndex = key - 49;
-		shouldRunAnimation[keyIndex] = true;
+		// Simulate increasing the threshold number,
+		touchThreshold[keyIndex] = 50;
+		// and once that reaches 50 we can run the animation
+		if (touchThreshold[keyIndex] >= 50) {
+			// Reset the threshold
+			touchThreshold[keyIndex] = 0;
+			// If it's the first button, we should run the animation
+			if (keyIndex == 0) {
+				cout << "WE SHOULD BE HERE WHAT THE FUCK" << endl;
+				shouldRunAnimation[keyIndex] = true;
+			} else if (keyIndex == 1 || keyIndex == 2) {
+				cout << "WHAT ARE We RUNNING " << shouldRunAnimation[0] << endl;
+				if (shouldRunAnimation[0]) {
+					shouldRunAnimation[keyIndex] = true;
+				}
+			} else if (keyIndex == 3 || keyIndex == 4) {
+				if (shouldRunAnimation[1] || shouldRunAnimation[2]) {
+					shouldRunAnimation[keyIndex] = true;
+				}
+			} else if (keyIndex == 8) {
+				for (int j = 0; j < shouldRunAnimation.size(); j++) {
+					shouldRunAnimation[j] = false;
+				}
+			}
+		}
 	}
 }
 
@@ -167,37 +218,43 @@ void ofApp::runAnimation(int animationNum){
 	ofSetColor(red);
 	switch(animationNum) {
 		case 1:
-			animationOne.update(animationCounter[0]);
-			animationOne.draw();
+			// animationOne.update(animationCounter[0]);
+			// animationOne.draw();
+			ofDrawRectangle(0, 0, width/3.0, height/5.0);
 			break;
 		case 2:
-			animationTwo.update(animationCounter[1]);
-			animationTwo.draw();
+			// animationTwo.update(animationCounter[1]);
+			// animationTwo.draw();
+			ofDrawRectangle(width/3.0, 0, width/3.0, height/5.0);
 			break;
 		case 3:
-			animationThree.update(animationCounter[2]);
-			animationThree.draw();
+			// animationThree.update(animationCounter[2]);
+			// animationThree.draw();
+			ofDrawRectangle(width - width/3.0, 0, width/3.0, height/5.0);
 			break;
 		case 4:
-			animationFour.update(animationCounter[3]);
-			animationFour.draw();
+			// animationFour.update(animationCounter[3]);
+			// animationFour.draw();
+			ofDrawRectangle(0, height/5.0, width/3.0, height - 2.0 * (height/5.0));
 			break;
 		case 5:
-			animationFive.update(animationCounter[4]);
-			animationFive.draw();
+			// animationFive.update(animationCounter[4]);
+			// animationFive.draw();
+			ofDrawRectangle(width/3.0, height/5.0, width/3.0, height - 2.0 * (height/5.0));
 			break;
 		case 6:
-			animationSix.update(animationCounter[5]);
-			animationSix.draw();
+			// animationSix.update(animationCounter[5]);
+			// animationSix.draw();
+			ofDrawRectangle(width - width/3.0, height/5.0, width/3.0, height - 2.0 * (height/5.0));
 			break;
 		case 7:
-			ofDrawRectangle(0, height/3.0 * 2, width/3.0, height/3.0);
+			ofDrawRectangle(0, height - height/5.0, width/3.0, height/3.0);
 			break;
 		case 8:
-			ofDrawRectangle(width/3.0, height/3.0 * 2, width/3.0, height/3.0);
+			ofDrawRectangle(width/3.0, height - height/5.0, width/3.0, height/3.0);
 			break;
 		case 9:
-			ofDrawRectangle(width/3.0 * 2, height/3.0 * 2, width/3.0, height/3.0);
+			ofDrawRectangle(width/3.0 * 2, height - height/5.0, width/3.0, height/3.0);
 			break;
 		default:
 			cout << "WHAT FUCKING KEY IS THIS?? " << animationNum << endl;

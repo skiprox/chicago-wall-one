@@ -20,18 +20,19 @@ class ofApp : public ofBaseApp{
 		void drawHandMarkers();
 		void drawAnimations();
 		void onNewMessage(string & message);
-		void keyReleased(int key);
+		void keyPressed(int key);
 		void runAnimation(int animationNum);
 
 		ofxSimpleSerial	mySerial;
 		int baud = 57600;
-		ofColor colorOn = ofColor(203, 255, 181);
         ofColor red = ofColor(220, 20, 30);
     	int serial1 = 0;
     	int serial2 = 0;
 
     	float width;
     	float height;
+
+        float smSqSize;
 
     	float universalCounter = 0.0;
 
@@ -43,7 +44,7 @@ class ofApp : public ofBaseApp{
 
     	std::array<bool, 9> shouldRunAnimation = {{false, false, false, false, false, false, false, false, false}};
     	std::array<int, 9> animationCounter = {{0, 0, 0, 0, 0, 0, 0, 0, 0}};
-    	std::array<int, 9> animationCounterMax = {{500, 500, 500, 500, 500, 500, 500, 500, 500}};
+    	std::array<int, 9> animationCounterMax = {{5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000}};
 
     	// All animations declared here
     	Line animationOne;
@@ -58,6 +59,6 @@ class ofApp : public ofBaseApp{
         array<glm::vec2, 4> newPoints1, newPoints2, newPoints3, newPoints4;
 
     	// All the hand markers declared here
-    	std::array<HandMarker, 3> handMarkers;
+    	std::array<HandMarker, 9> handMarkers;
 		
 };
